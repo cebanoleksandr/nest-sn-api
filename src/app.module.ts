@@ -9,6 +9,7 @@ import { UsersModule } from './users/users.module';
 import { PostsModule } from './posts/posts.module';
 import { CommentsModule } from './comments/comments.module';
 import { ConversationModule } from './conversation/conversation.module';
+import { MessageModule } from './message/message.module';
 
 @Module({
   imports: [
@@ -24,7 +25,8 @@ import { ConversationModule } from './conversation/conversation.module';
     UsersModule,
     PostsModule,
     CommentsModule,
-    ConversationModule
+    ConversationModule,
+    MessageModule
   ],
   controllers: [AppController],
   providers: [AppService],
