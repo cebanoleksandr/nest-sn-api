@@ -10,12 +10,25 @@ export class AuthService {
   constructor(
     private readonly jwtService: JwtService,
     private readonly usersService: UsersService
-  ) {}
+  ) { }
 
   async createUser(dto: AuthDto) {
     const salt = await genSalt(10);
     const passwordHash = await hash(dto.password, salt);
-    return await this.usersService.create({ login: dto.login, password: passwordHash });
+    const baseUser = {
+      firstName: '',
+      lastName: '',
+      photoUrl: '',
+      gender: '',
+      username: '',
+      isPrivate: false,
+      coverPhotoUrl: '',
+      bio: '',
+      location: { city: '', country: '' },
+      dateOfBirth: new Date(),
+      contacts: { email: '', phone: '', website: '' },
+    };
+    return await this.usersService.create({ login: dto.login, password: passwordHash, ...baseUser });
   }
 
   async findUser(email: string) {

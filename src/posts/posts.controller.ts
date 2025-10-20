@@ -30,7 +30,14 @@ export class PostsController {
   @UseGuards(JwtAuthGuard)
   @Post()
   async create(@Body() dto: CreatePostDto) {
-    return this.postsService.create(dto);
+    const body = {
+      content: '',
+      media: [],
+      hashtags: [],
+      likeIds: [],
+      saveIds: [],
+    };
+    return this.postsService.create({ ...body, ...dto });
   }
 
   @UseGuards(JwtAuthGuard)
